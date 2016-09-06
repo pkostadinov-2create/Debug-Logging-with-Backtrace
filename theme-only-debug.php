@@ -13,9 +13,16 @@ function crb_ignore_plugins_errors($errno='', $errstr='', $errfile='', $errline=
 	$debug = debug_backtrace();
 	$backtrace_result = array();
 	foreach ($debug as $index => $entry) {
-		$backtrace_result[$index]['file'] = $entry['file'];
-		$backtrace_result[$index]['line'] = $entry['line'];
-		$backtrace_result[$index]['function'] = $entry['function'];
+		if ( !empty($entry['file']) ) {
+			$backtrace_result[$index]['file'] = $entry['file'];
+		}
+
+		if ( !empty($entry['line']) ) {
+			$backtrace_result[$index]['line'] = $entry['line'];
+		}
+		if ( !empty($entry['function']) ) {
+			$backtrace_result[$index]['function'] = $entry['function'];
+		}
 	}
 
 	// Normalize paths
